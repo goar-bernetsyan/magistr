@@ -1,0 +1,149 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Выбор Действий</title>
+    <link rel="stylesheet" href="/static/css/style.css" /> <!-- Общие стили -->
+    <link rel="stylesheet" href="/static/css/choice.css" /> <!-- Стили для choice -->
+
+    <!-- Подключаем Google Fonts для шрифта -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container">
+
+
+        <header class="header btn-header">
+            <a href="/" class="nav-link">&lt; На главную</a>
+            <button class="nav-link dataset-btn">Датасет</button>
+        </header>
+
+        <main class="main-content choice-main">
+            <div class="status-message">
+                <h2>Данные загружены!</h2>
+                <h3>Выберите действия:</h3>
+            </div>
+
+            <div class="actions-list" id="actionsList">
+                <ul>
+
+
+
+
+                    <li class="action-item has-submenu" data-action="data_preprocessing">
+                        <span class="toggle-icon"></span> Разведочный анализ данных
+                    </li>
+                    <ul class="submenu">
+                        <li><label><input type="checkbox" name="action" value="data_overview"> Просмотр общей информации о датасете </label></li>
+                        <li><label><input type="checkbox" name="action" value="statistical_analysis"> Статистический анализ основных признаков </label></li>
+                        <li><label><input type="checkbox" name="action" value="distribution_visualization"> Визуализация распределений признаков </label></li>
+                        <li><label><input type="checkbox" name="action" value="scatter_visualization"> Визуализация взаимосвязей признаков </label></li>
+                        <li><label><input type="checkbox" name="action" value="correlation_analysis"> Анализ корреляций между признаками </label></li>
+<!--                        <li><label><input type="checkbox" name="action" value="outliers_detection"> Обнаружение выбросов и аномалий </label></li>-->
+                        <li><label><input type="checkbox" name="action" value="missing_values"> Проверка наличия пропущенных значений </label></li>
+                        <li><label><input type="checkbox" name="action" value="unique_value_analysis"> Анализ уникальных значений и частот </label></li>
+                        <li><label><input type="checkbox" name="action" value="pivot_tables"> Создание сводных таблиц и группировок </label></li>
+                    </ul>
+
+
+
+
+
+                    <li class="action-item has-submenu" data-action="data_preprocessing">
+                        <span class="toggle-icon"></span> Предварительная обработка данных
+                    </li>
+                    <ul class="submenu">
+                        <li><label><input type="checkbox" name="action" value="deleting_columns"> Удаление столбцов </label></li>
+                        <li><label><input type="checkbox" name="action" value="categorical_encoding"> Кодирование категориальных признаков </label></li>
+                        <li><label><input type="checkbox" name="action" value="scaling_normalization"> Масштабирование и нормализация признаков </label></li>
+                        <li><label><input type="checkbox" name="action" value="data_cleaning"> Очистка данных от NaN </label></li>
+                        <li><label><input type="checkbox" name="action" value="feature_engineering"> Выделение и создание новых признаков </label></li>
+                        <li><label><input type="checkbox" name="action" value="duplicate_removal"> Удаление дубликатов </label></li>
+<!--                        <li><label><input type="checkbox" name="action" value="time_series"> Работа с временными рядами </label></li>-->
+                    </ul>
+
+
+
+
+                    <li class="action-item has-submenu" data-action="ml_models">
+                        <span class="toggle-icon"></span> Машинное обучение
+                    </li>
+                    <ul class="submenu">
+                        <li class="action-item has-submenu" data-action="outlier_removal">
+                            <span class="toggle-icon" title="Прогнозирование непрерывных числовых переменных (например, цена, температура, объём продаж)."></span> Регрессия
+                        </li>
+                        <ul class="submenu">
+                            <!-- Подподпункты -->
+                            <li><label><input type="checkbox" name="action" value="R_linear_regression" title="Быстрая, простая, для линейных связей, чувствительна к выбросам."> Линейная регрессия </label></li>
+                            <li><label><input type="checkbox" name="action" value="R_decision_tree" title="Обрабатывает нелинейные, сложные связи, склонно к переобучению (особенно на малых данных), чувствительно к шумам."> Деревья решений  </label></li>
+                            <li><label><input type="checkbox" name="action" value="R_random_forest" title="Улучшенная версия дерева решений: устойчивее к переобучению и шуму, но медленнее."> Случайный лес </label></li>
+                            <li><label><input type="checkbox" name="action" value="R_gradient_boosting_xg" title="Высокоточный, устойчив к выбросам, подходит для больших данных, быстрый. Требует тщательного подбора параметров."> Градиентный бустинг (XGBoost) </label></li>
+                            <li><label><input type="checkbox" name="action" value="R_gradient_boosting_cat" title="Высокоточный, очень устойчив к выбросам и к переобучению, подходит для больших данных (но медленнее XGBoost). Отличный выбор, если в данных много категориальных признаков (сам их обрабатывает)."> Градиентный бустинг (CatBoost) </label></li>
+                            <li><label><input type="checkbox" name="action" value="R_svm" title="Для сложных задач на небольших наборах данных, хорошо разделяет сложные границы."> Метод опорных векторов (SVM) </label></li>
+                            <li><label><input type="checkbox" name="action" value="R_knn" title="Для небольших и простых наборов данных, чувствительна к шумам и выбросам."> K-ближайших соседей (KNN) </label></li>
+                        </ul>
+
+
+                        <li class="action-item has-submenu" data-action="dl_models">
+                            <span class="toggle-icon" title="Отнесение объектов к заранее определённым дискретным классам (например, да/нет, оценка (1-5), диагноз)."></span> Классификация
+                        </li>
+                        <ul class="submenu">
+                            <!-- Подподпункты -->
+                            <li><label><input type="checkbox" name="action" value="C_logistic_regression" title="Быстрая, простая, но плохо справляется со сложными зависимостями."> Логистическая регрессия </label></li>
+                            <li><label><input type="checkbox" name="action" value="C_decision_tree" title="Обрабатывает нелинейные, сложные связи, склонно к переобучению (особенно на малых данных), чувствительно к шумам."> Деревья решений  </label></li>
+                            <li><label><input type="checkbox" name="action" value="C_random_forest" title="Улучшенная версия дерева решений: устойчивее к переобучению и шуму, но медленнее."> Случайный лес </label></li>
+                            <li><label><input type="checkbox" name="action" value="C_gradient_boosting_xg" title="Высокоточный, устойчив к выбросам, подходит для больших данных, быстрый. Требует тщательного подбора параметров."> Градиентный бустинг (XGBoost) </label></li>
+                            <li><label><input type="checkbox" name="action" value="C_gradient_boosting_cat" title="Высокоточный, очень устойчив к выбросам и к переобучению, подходит для больших данных (но медленнее XGBoost). Отличный выбор, если в данных много категориальных признаков (сам их обрабатывает)."> Градиентный бустинг (CatBoost) </label></li>
+                            <li><label><input type="checkbox" name="action" value="C_svm" title="Для сложных задач на небольших наборах данных, хорошо разделяет сложные границы."> Метод опорных векторов (SVM) </label></li>
+                            <li><label><input type="checkbox" name="action" value="C_knn" title="Для небольших и простых наборов данных, чувствительна к шумам и выбросам."> K-ближайших соседей (KNN) </label></li>
+                        </ul>
+
+
+<!--                        <li><label><input type="checkbox" name="action" value="hyperparameter_tuning"> Тюнинг гиперпараметров </label></li>-->
+<!--                        <li><label><input type="checkbox" name="action" value="cross_validation"> Кросс-валидация и оценка качества моделей (точность, F1-score, ROC-AUC, и др.) </label></li>-->
+<!--                        <li><label><input type="checkbox" name="action" value="model_visualization"> Визуализация результатов моделей (классификационные границы, важность признаков) </label></li>-->
+                    </ul>
+
+
+
+
+
+
+
+
+                </ul>
+            </div>
+
+            <button class="ready-btn" onclick="submitActions()">Готово</button>
+        </main>
+    </div>
+
+    <!-- Модальное окно для просмотра датасета -->
+    <div id="datasetViewerModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Просмотр датасета: {{ filename }}</h3>
+                <span class="close-button" onclick="closeDatasetViewer()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p>Загрузка данных...</p>
+                <table id="datasetTable">
+                    <!-- Таблица будет заполнена динамически -->
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/scripts.js"></script> <!-- Общие скрипты (если есть) -->
+    <script src="/static/js/choice.js"></script>   <!-- Скрипты для choice -->
+    <script>
+        // Получаем имя файла из шаблона Flask
+        const uploadedFilename = "{{ filename }}";
+    </script>
+
+</body>
+</html>

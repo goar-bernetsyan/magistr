@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Выбор Действий</title>
+    <link rel="stylesheet" href="/static/css/style.css" />
+    <link rel="stylesheet" href="/static/css/result.css" />
+
+    <!-- Подключаем Google Fonts для шрифта -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container">
+
+
+        <header class="header btn-header">
+            <a href="/" class="nav-link">&lt; На главную</a>
+            <button id="export-btn" class="nav-link export-btn">Экспорт</button>
+        </header>
+
+        <main class="main-content result-main">
+          <div id="results-container" class="results-grid">
+             <div class="loading-spinner">Ожидание начала обработки...</div>
+             <div id="action-form-container" style="display: none;">
+                 <!-- Форма будет вставляться сюда JS -->
+             </div>
+          </div>
+        </main>
+
+    </div>
+
+
+    <script src="/static/js/scripts.js"></script>
+    <script src="/static/js/result.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+</body>
+</html>
