@@ -1,0 +1,56 @@
+
+.header.home-header {
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0; /* Убираем padding, чтобы контент растягивался */
+}
+
+.header.home-header h1 {
+    font-size: 4rem;
+    font-weight: 700;
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 30px;
+}
+
+.text-placeholder {
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: #d1d1d1;
+    line-height: 1.8;
+}
+
+.text-placeholder p {
+    margin: 0.5em 0;
+}
+
+.footer.home-footer {
+    flex: 1;
+    background-color: #e7e4e4 /*#f0f0f0*/ /*#9da3a7*/; /*это светлый тон нижней части*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0; /* Убираем padding, чтобы контент растягивался */
+}
+
+.upload-btn { /* кнопка "Загрузить" */
+    background-color: #1e2129;
+    color: white;
+    border: none;
+    padding: 20px 50px;
+    border-radius: 40px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.3s;
+    font-family: 'Roboto Slab', sans-serif;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.upload-btn:hover {
+    background-color: #333844;
+}
+

@@ -1,0 +1,110 @@
+/* Общие настройки */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Roboto Slab', sans-serif; /* Используем Roboto Slab как основной шрифт */
+    background-color: #f4f7f6; /* Светлый фон для всего приложения */
+    color: #333; /* Основной цвет текста */
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Минимальная высота, чтобы футер был внизу */
+}
+
+.header {
+    background-color: #1e2129;
+    color: white;
+    padding: 15px 30px; /* Увеличиваем padding */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+
+.header.btn-header { /* верхняя полоска с кнопками на choice и result */
+    background-color: #1e2129;
+    color: white;
+    display: flex;
+    justify-content: space-between; /* Распределяем элементы по краям */
+    align-items: center; /* Центрируем по вертикали */
+    padding: 20px 40px; /* размер чёрной полоски*/
+}
+
+.nav-link { /* кнопка "На главную" */
+    color: white;
+    text-decoration: none;
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.nav-link:hover {
+    color: #9da3a7; /* Цвет при наведении */
+}
+
+.nav-arrow {
+    font-size: 1.5rem;
+    margin-right: 5px;
+}
+
+.page-title {
+    font-size: 2.2rem; /* Уменьшаем размер заголовка страницы */
+    font-weight: 700;
+    font-family: 'Playfair Display', serif; /* Используем Playfair Display для заголовка */
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* Выравниваем кнопку вправо */
+    flex-grow: 1; /* Позволяем заголовку занять остальное пространство */
+}
+
+.dataset-name {
+    margin-right: 20px;
+    font-size: 1.8rem;
+}
+
+.view-dataset-btn {
+    background-color: #e7e4e4 /*#9da3a7*/;
+    color: #1e2129;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px; /* Скругленные углы */
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    font-family: 'Roboto Slab', sans-serif;
+}
+
+.view-dataset-btn:hover {
+    background-color: #333844;
+    color: white;
+}
+
+/* Основное содержимое (Main Content) */
+.main-content {
+    flex: 1; /* Занимает все доступное пространство */
+    padding: 30px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Центрируем содержимое по горизонтали */
+    text-align: center;
+}
+
+
+
+/* Нижняя часть (Footer) - теперь может быть не нужна или иметь другое назначение */
+/* Если вы хотите, чтобы футер оставался внизу страницы,
+   используйте flex-shrink: 0; на main-content и flex-grow: 1; для всего */
+.footer {
+    flex-shrink: 0; /* Предотвращает сжатие футера */
+    background-color: #e7e4e4 /*#9da3a7*/;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    color: white;
+    font-size: 0.9rem;
+    margin-top: auto; /* Прижимает футер к низу, если контента меньше высоты экрана */
+}
+

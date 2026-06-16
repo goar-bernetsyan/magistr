@@ -1,0 +1,103 @@
+.nav-link.export-btn { /* кнопка "Экспорт" */
+    background: none;
+    border: none;
+}
+
+
+
+/* Основное содержимое */
+.main-content.result-main {
+    flex: 1;
+    padding: 30px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: #e7e4e4; /*это цвет светлой части*/
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* result.css */
+.results-grid {
+   display: grid;
+   grid-template-columns: repeat(auto-fill, minmax(600px, 1fr));
+   gap: 30px;
+}
+
+.result-block {
+   background: white;
+   border-radius: 10px;
+   box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+   padding: 25px;
+}
+
+.result-block h2 {
+   margin-top: 0;
+   color: #333;
+   border-bottom: 1px solid #eee;
+   padding-bottom: 15px;
+}
+
+.result-content {
+   margin-top: 20px;
+}
+
+.data-table {
+   width: 100%;
+   border-collapse: collapse;
+   font-size: 14px;
+}
+.data-table th,
+.data-table td {
+   padding: 8px;
+   text-align: center;
+}
+.data-table th {
+   background-color: #f5f5f5;
+}
+.data-table tr:nth-child(even) {
+   background-color: #fafafa;
+}
+.data-table tr:hover {
+   background-color: #f0f8ff;
+}
+
+.analysis-image {
+   max-width: 100%;
+   height: auto;
+   border-radius: 8px;
+}
+
+.code-block {
+   background-color: #f6f8fa;
+   padding: 15px;
+   border-radius: 6px;
+   overflow-x: auto;
+}
+
+/* result.css */
+.error-message {
+   background-color: #ffebee;
+   color: #c62828;
+   padding: 15px;
+   border-radius: 6px;
+   border-left: 4px solid #c62828;
+   margin-top: 15px;
+}
+
+
+
+#results-container {
+    page-break-inside: auto;
+}
