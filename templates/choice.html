@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -13,10 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-
     <div class="container">
-
-
         <header class="header btn-header">
             <a href="/" class="nav-link">&lt; На главную</a>
             <button class="nav-link dataset-btn">Датасет</button>
@@ -30,9 +26,6 @@
 
             <div class="actions-list" id="actionsList">
                 <ul>
-
-
-
 
                     <li class="action-item has-submenu" data-action="data_preprocessing">
                         <span class="toggle-icon"></span> Разведочный анализ данных
@@ -49,10 +42,6 @@
                         <li><label><input type="checkbox" name="action" value="pivot_tables"> Создание сводных таблиц и группировок </label></li>
                     </ul>
 
-
-
-
-
                     <li class="action-item has-submenu" data-action="data_preprocessing">
                         <span class="toggle-icon"></span> Предварительная обработка данных
                     </li>
@@ -65,9 +54,6 @@
                         <li><label><input type="checkbox" name="action" value="duplicate_removal"> Удаление дубликатов </label></li>
 <!--                        <li><label><input type="checkbox" name="action" value="time_series"> Работа с временными рядами </label></li>-->
                     </ul>
-
-
-
 
                     <li class="action-item has-submenu" data-action="ml_models">
                         <span class="toggle-icon"></span> Машинное обучение
@@ -86,8 +72,6 @@
                             <li><label><input type="checkbox" name="action" value="R_svm" title="Для сложных задач на небольших наборах данных, хорошо разделяет сложные границы."> Метод опорных векторов (SVM) </label></li>
                             <li><label><input type="checkbox" name="action" value="R_knn" title="Для небольших и простых наборов данных, чувствительна к шумам и выбросам."> K-ближайших соседей (KNN) </label></li>
                         </ul>
-
-
                         <li class="action-item has-submenu" data-action="dl_models">
                             <span class="toggle-icon" title="Отнесение объектов к заранее определённым дискретным классам (например, да/нет, оценка (1-5), диагноз)."></span> Классификация
                         </li>
@@ -101,23 +85,10 @@
                             <li><label><input type="checkbox" name="action" value="C_svm" title="Для сложных задач на небольших наборах данных, хорошо разделяет сложные границы."> Метод опорных векторов (SVM) </label></li>
                             <li><label><input type="checkbox" name="action" value="C_knn" title="Для небольших и простых наборов данных, чувствительна к шумам и выбросам."> K-ближайших соседей (KNN) </label></li>
                         </ul>
-
-
-<!--                        <li><label><input type="checkbox" name="action" value="hyperparameter_tuning"> Тюнинг гиперпараметров </label></li>-->
-<!--                        <li><label><input type="checkbox" name="action" value="cross_validation"> Кросс-валидация и оценка качества моделей (точность, F1-score, ROC-AUC, и др.) </label></li>-->
-<!--                        <li><label><input type="checkbox" name="action" value="model_visualization"> Визуализация результатов моделей (классификационные границы, важность признаков) </label></li>-->
                     </ul>
-
-
-
-
-
-
-
 
                 </ul>
             </div>
-
             <button class="ready-btn" onclick="submitActions()">Готово</button>
         </main>
     </div>
