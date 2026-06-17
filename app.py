@@ -804,33 +804,47 @@ def machine_learning(df, model_name, params):
         y_pred = model.predict(X_test)
 
         if model_name.startswith('R_'): # Метрики для регрессии
-            err_1 = np.sqrt(mean_squared_error(y_test, y_pred))
-            err_2 = mean_absolute_error(y_test, y_pred) # или просто np.mean(np.abs(y_test - y_pred)) # тогда и метод mean_absolute_error в импортах не нужен
-
+            err_1 = mean_absolute_error(y_test, y_pred) # или просто np.mean(np.abs(y_test - y_pred)) # тогда и метод mean_absolute_error в импортах не нужен
+            err_2 = np.sqrt(mean_squared_error(y_test, y_pred))
             result_html = f"""
                 <h3>Модель: {model_name.replace('_', ' ').title()}</h3>
-                <p>RMSE: {err_1:.4f}</p>
-                <p>MAE: {err_2:.4f}</p>
+                <p title="Средняя абсолютная ошибка. Это средняя величина ошибки предсказаний, без акцента на выбросы (просто берёт модуль всех отклонений и усредняет их). Диапазон: [0;+∞). Чем меньше, тем лучше. Менее чувствительна к выбросам. Используется, чтобы показать «честную» среднюю ошибку, не искажённую выбросами">MAE: {err_1:.4f}</p>
+                <p title="Корень из среднеквадратичной ошибки. Это среднее «расстояние» между предсказанными и реальными значениями, но с усиленным акцентом на большие ошибки (сначала возводит ошибки в квадрат (усиливая влияние больших промахов), усредняет, а затем извлекает корень). Диапазон: [0;+∞). Чем меньше, тем лучше. Эта метрика чувствительна к выбросам: если модель сильно ошиблась хотя бы несколько раз, RMSE заметно вырастет. Используется, чтобы подсветить риск крупных ошибок — критично для финансов, медицины и т.п.">RMSE: {err_2:.4f}</p>
             """
 
         else:
             err_1 = accuracy_score(y_test, y_pred)
             err_2 = confusion_matrix(y_test, y_pred)
 
+            classes = sorted(set(y_test)) # pd.Series(y_test).unique() # определяем названия классов
+            df_cm = pd.DataFrame(err_2, index=classes, columns=classes) # Создаем DataFrame с подписями строк и столбцов
+            html_table = df_cm.to_html(index=True, border=1)
+
+            # result_html = f"""
+            #     <p>Confusion Matrix:</p>
+            #     {html_table}
+            # """
+
+
             result_html = f"""
-                <h3>Модель: {model_name.replace('_', ' ').title()}</h3>
-                <p>Accuracy: {err_1:.4f}</p>
-                <p>Confusion Matrix:</p>
-                <table style="border-collapse: collapse; font-size: small; border: 1px solid black; margin: 0 auto;">
+            <h3>Модель: {model_name.replace('_', ' ').title()}</h3>
+            <p title="Доля правильных предсказаний среди всех. Диапазон: [0;1]. Чем больше, тем лучше. Может быть обманчивой при дисбалансе классов.">Accuracy: {err_1:.4f}</p>
+            <p title="Матрица ошибок. Диапазон значений в ячейках: [0;𝑁] , где 𝑁 — общее число наблюдений. Главная диагональ — верные ответы. Остальные ячейки — ошибки.">Confusion Matrix:</p>
+            <div style="text-align: center; margin-bottom: 3px;">
+                <span style="font-size: small;">Предсказание</span>
+            </div>
+            <div style="text-align: center; margin-bottom: 3px; margin-right: 22px;">
+                <table style="margin: 0 auto; border-collapse: collapse; font-size: small">
                     <tr>
-                        <td style="border: 1px solid black; padding: 4px;">{err_2[0,0]}</td>
-                        <td style="border: 1px solid black; padding: 4px;">{err_2[0,1]}</td>
-                    </tr>
-                    <tr>
-                        <td style="border: 1px solid black; padding: 4px;">{err_2[1,0]}</td>
-                        <td style="border: 1px solid black; padding: 4px;">{err_2[1,1]}</td>
+                        <td style="vertical-align: middle; text-align: center; writing-mode: vertical-rl; transform: rotate(180deg); padding: 3px;">
+                            Истина
+                        </td>
+                        <td>
+                            {html_table}
+                        </td>
                     </tr>
                 </table>
+            </div>
             """
 
         #f"""< p > Целевая колонка: < strong > {target_col} < / strong > < / p >"""
