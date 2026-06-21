@@ -103,9 +103,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Функция для отображения формы параметров
     function showParamsForm(data) {
+        const resultsContainer = document.getElementById('results-container'); // Убедитесь, что контейнер существует #!
         let formHTML = `
             <div class="result-block">
-                <h5>Параметры для действия: ${data.action}</h5>
                 <form id="action-form" class="params-form">
                     <div class="params-fields">
         `;
@@ -113,6 +113,27 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const action = data.action;
         const schema = data.params_schema;
+
+        // Проверка существования schema #!
+        if (!schema) {
+            formHTML += `
+                <div class="error-message">
+                    <p>Ошибка: не получены данные схемы от сервера</p>
+                    <p>Проверьте логи сервера и консоль браузера</p>
+                </div>
+            `;
+            formHTML += `
+                    </div>
+                    <button type="submit" class="ready-btn">Выполнить</button>
+                </form>
+            </div>
+            `;
+            const block = document.createElement('div');
+            block.className = 'result-block';
+            block.innerHTML = formHTML;
+            resultsContainer.appendChild(block);
+            return;
+        }
 
 
         if (schema.type === 'checkbox') {
@@ -140,44 +161,64 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         }
 
+
         else if (action === 'data_cleaning') {
-            // Формируем HTML для сложной формы с выбором метода очистки для каждого столбца
-            formHTML += `<p>${schema.label}</p>`;
+            // Отладочные логи с корректной переменной
+            console.log("--- DEBUG: SHOW_PARAMS_FORM ---");
+            console.log("Raw data from server:", data);
+            console.log("Schema object:", schema);
+            console.log("params_schema exists:", !!schema);
+            if (schema) {
+                console.log("columns exists:", !!schema.columns);
+                console.log("columns data:", schema.columns);
+            }
+            console.log("--- END DEBUG ---");
 
-            const columnsList = data.params_schema.columns_list;
+            // Проверка типа схемы
+            if (schema.type !== 'cleaning_table') {
+                formHTML += `
+                    <div class="error-message">
+                        <p>Неподдерживаемый тип схемы: ${schema.type}</p>
+                    </div>
+                `;
+            } else if (!schema.columns || schema.columns.length === 0) {
+                formHTML += `
+                    <div class="warning-message">
+                <p>Нет данных о столбцах для очистки</p>
+                    </div>
+                `;
+            } else {
+                formHTML += `<p>${schema.label || 'Выберите метод обработки пропусков NaN для каждого столбца:'}</p>`;
+                formHTML += '<table class="cleaning-table"><thead><tr><th>Столбец</th><th>Тип</th><th>Метод очистки</th></tr></thead><tbody>';
 
-            // УБИРАЕМ "--Не обрабатывать--". "пропустить" теперь по умолчанию (пустое значение select)
-            const actionsList = [
-                "заменить на 0",
-                "заменить на среднее",
-                "заменить на медиану",
-                "заменить на самое частое значение",
-                "предсказать значение с помощью KNNImputer",
-                "заполнить предыдущим значением",
-                "заполнить следующим значением"
-            ];
+                schema.columns.forEach(colData => {
+                    const col = colData.column_name;
+                    const colType = colData.column_type;
+                    const actionsList = colData.actions;
 
-            formHTML += '<table class="cleaning-table"><thead><tr><th>Столбец</th><th>Метод очистки</th></tr></thead><tbody>';
+                    formHTML += `<tr>
+                        <td>${col}</td>
+                <td><small>${colType}</small></td>
+                <td>
+                    <select name="cleaning_${col}" class="cleaning-select">
+                        <option value="" selected>пропустить</option>`;
 
-            columnsList.forEach(col => {
-                formHTML += `<tr>
-                                <td>${col}</td>
-                                <td>
-                                    <select name="cleaning_${col}">
-                                        <!-- ПУСТОЕ ЗНАЧЕНИЕ ПО УМОЛЧАНИЮ ("пропустить") -->
-                                        <option value="" selected>пропустить</option>`;
+                    actionsList.forEach(action => {
+                        formHTML += `<option value="${action}">${action}</option>`;
+                    });
 
-                actionsList.forEach(action => {
-                    formHTML += `<option value="${action}">${action}</option>`;
+                    formHTML += `</select>
+                </td>
+            </tr>`;
                 });
 
-                formHTML += `      </select>
-                                </td>
-                             </tr>`;
-            });
-
-            formHTML += `</tbody></table>`;
+                formHTML += `</tbody></table>`;
+            }
         }
+
+
+
+
 
         else if (action === 'unique_value_analysis') {
             const columnsList = data.params_schema.columns_list;
@@ -276,17 +317,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
         else if (schema.type === 'complex_ml') {
             const columnsList = data.params_schema.columns_list;
-            const modelDisplayName = data.params_schema.model_name
-                .replace('R_', '')
-                .replace('C_', '')
-                .replace(/_/g, ' ') // Заменяет все подчеркивания на пробелы
-                .replace(/\b\w/g, l => l.toUpperCase()); // Делает первую букву каждого слова заглавной
+            const modelDisplayName = data.params_schema.display_name; // Используем русское название
 
             formHTML += `
                 <div>
-                    <h5>Модель: ${modelDisplayName}</h5>
-                    <p>${data.params_schema.label}</p>
-
+                    <p>Настройка модели: ${data.params_schema.display_name}</p>
                     <label for="target_col_select">Выберите целевой столбец (что предсказываем):</label>
                     <select name="target_col" id="target_col_select" required>
                         <option value="" disabled selected>Выберите столбец...</option>
