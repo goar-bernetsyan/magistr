@@ -63,8 +63,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     const block = document.createElement('div');
                     block.className = 'result-block';
                     block.innerHTML = `
-                        <h2>Обработка завершена!</h2>
-                        <p>Все выбранные действия выполнены. Вы можете экспортировать результаты.</p>
+                        <h3>Все выбранные действия выполнены !</h3>
+                        <h5>Вы можете экспортировать результаты.</h5>
                     `;
                     resultsContainer.appendChild(block);
                     exportBtn.style.display = 'inline-block'; // Показываем кнопку экспорта
@@ -137,16 +137,24 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
         if (schema.type === 'checkbox') {
-            formHTML += `<p>${schema.label}</p>`;
-            schema.options.forEach(option => {
-                formHTML += `
-                    <label>
-                        <input type="checkbox" name="${schema.name}" value="${option}">
-                        ${option}
-                    </label><br>
-                `;
-            });
+            if (schema.options && schema.options.length > 0) {
+                formHTML += `<p>${schema.label}</p>`;
+                schema.options.forEach(option => {
+                    formHTML += `
+                        <label>
+                            <input type="checkbox" name="${schema.name}" value="${option}">
+                            ${option}
+                        </label><br>
+                    `;
+                });
+            } else {
+                formHTML += '<p>Нет доступных столбцов для выбора</p>';
+            }
         }
+
+
+
+
 
         else if (schema.type === 'radio') {
             formHTML += `<p>${schema.label}</p>`;
@@ -189,7 +197,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 `;
             } else {
                 formHTML += `<p>${schema.label || 'Выберите метод обработки пропусков NaN для каждого столбца:'}</p>`;
-                formHTML += '<table class="cleaning-table"><thead><tr><th>Столбец</th><th>Тип</th><th>Метод очистки</th></tr></thead><tbody>';
+                formHTML += '<center><table><thead><tr><th>Столбец</th><th>Тип</th><th>Метод очистки</th></tr></thead><tbody>';
 
                 schema.columns.forEach(colData => {
                     const col = colData.column_name;
@@ -215,10 +223,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 formHTML += `</tbody></table>`;
             }
         }
-
-
-
-
 
         else if (action === 'unique_value_analysis') {
             const columnsList = data.params_schema.columns_list;
