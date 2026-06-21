@@ -36,8 +36,7 @@
                         <li><label><input type="checkbox" name="action" value="distribution_visualization"> Визуализация распределений признаков </label></li>
                         <li><label><input type="checkbox" name="action" value="scatter_visualization"> Визуализация взаимосвязей признаков </label></li>
                         <li><label><input type="checkbox" name="action" value="correlation_analysis"> Анализ корреляций между признаками </label></li>
-<!--                        <li><label><input type="checkbox" name="action" value="outliers_detection"> Обнаружение выбросов и аномалий </label></li>-->
-                        <li><label><input type="checkbox" name="action" value="missing_values"> Проверка наличия пропущенных значений </label></li>
+                        <li><label><input type="checkbox" name="action" value="missing_values" title="Проверяйте данные на пропуски перед обучением модели, т. к. большинство моделей не работают с ними."> Проверка наличия пропущенных значений </label></li>
                         <li><label><input type="checkbox" name="action" value="unique_value_analysis"> Анализ уникальных значений и частот </label></li>
                         <li><label><input type="checkbox" name="action" value="pivot_tables"> Создание сводных таблиц и группировок </label></li>
                     </ul>
@@ -46,12 +45,13 @@
                         <span class="toggle-icon"></span> Предварительная обработка данных
                     </li>
                     <ul class="submenu">
-                        <li><label><input type="checkbox" name="action" value="deleting_columns"> Удаление столбцов </label></li>
-                        <li><label><input type="checkbox" name="action" value="categorical_encoding"> Кодирование категориальных признаков </label></li>
-                        <li><label><input type="checkbox" name="action" value="scaling_normalization"> Масштабирование и нормализация признаков </label></li>
-                        <li><label><input type="checkbox" name="action" value="data_cleaning"> Очистка данных от NaN </label></li>
-                        <li><label><input type="checkbox" name="action" value="feature_engineering"> Выделение и создание новых признаков </label></li>
-                        <li><label><input type="checkbox" name="action" value="duplicate_removal"> Удаление дубликатов </label></li>
+<!--                        <li><label><input type="checkbox" name="action" value="feature_engineering" title=""> Выделение и создание новых признаков </label></li>-->
+                        <li><label><input type="checkbox" name="action" value="deleting_columns" title="Рекомендуется удалять столбцы, которые содержат более 50% пропусков или не коррелируют с целевой переменной."> Удаление столбцов </label></li>
+                        <li><label><input type="checkbox" name="action" value="data_cleaning" title="Требуется для работы всех предложенных ниже моделей, кроме градиентных бустингов."> Очистка данных от пропусков </label></li>
+                        <li><label><input type="checkbox" name="action" value="оutlier_removal" title=""> Удаление выбросов </label></li>
+                        <li><label><input type="checkbox" name="action" value="duplicate_removal" title="Полностью идентичные строки не несут новой информации и могут исказить результаты обучения.&#13;&#10НО их можно оставить, если они отражают важные закономерности или частотные характеристики (например, показывают частоту покупок)."> Удаление дубликатов </label></li>
+                        <li><label><input type="checkbox" name="action" value="scaling_normalization" title=""> Нормализация признаков </label></li>
+                        <li><label><input type="checkbox" name="action" value="categorical_encoding" title="Преобразование текстовых категорий в числа.&#13;&#10Требуется для работы всех предложенных ниже моделей."> Кодирование категориальных признаков </label></li>
 <!--                        <li><label><input type="checkbox" name="action" value="time_series"> Работа с временными рядами </label></li>-->
                     </ul>
 
@@ -60,30 +60,30 @@
                     </li>
                     <ul class="submenu">
                         <li class="action-item has-submenu" data-action="outlier_removal">
-                            <span class="toggle-icon" title="Прогнозирование непрерывных числовых переменных (например, цена, температура, объём продаж)."></span> Регрессия
+                            <span class="toggle-icon" title="Прогнозирование непрерывных числовых переменных&#13;&#10(например, цена, температура, объём продаж)."></span> Регрессия
                         </li>
                         <ul class="submenu">
                             <!-- Подподпункты -->
-                            <li><label><input type="checkbox" name="action" value="R_linear_regression" title="Быстрая, простая, для линейных связей, чувствительна к выбросам."> Линейная регрессия </label></li>
+                            <li><label><input type="checkbox" name="action" value="R_linear_regression" title="Быстрая и простая, для линейных связей, чувствительна к выбросам."> Линейная регрессия </label></li>
                             <li><label><input type="checkbox" name="action" value="R_decision_tree" title="Обрабатывает нелинейные, сложные связи, склонно к переобучению (особенно на малых данных), чувствительно к шумам."> Деревья решений  </label></li>
                             <li><label><input type="checkbox" name="action" value="R_random_forest" title="Улучшенная версия дерева решений: устойчивее к переобучению и шуму, но медленнее."> Случайный лес </label></li>
-                            <li><label><input type="checkbox" name="action" value="R_gradient_boosting_xg" title="Высокоточный, устойчив к выбросам, подходит для больших данных, быстрый. Требует тщательного подбора параметров."> Градиентный бустинг (XGBoost) </label></li>
-                            <li><label><input type="checkbox" name="action" value="R_gradient_boosting_cat" title="Высокоточный, очень устойчив к выбросам и к переобучению, подходит для больших данных (но медленнее XGBoost). Отличный выбор, если в данных много категориальных признаков (сам их обрабатывает)."> Градиентный бустинг (CatBoost) </label></li>
+                            <li><label><input type="checkbox" name="action" value="R_gradient_boosting_xg" title="Высокоточный, устойчив к выбросам, подходит для больших данных.&#13;&#10Требует тщательного подбора параметров.&#13;&#10Может работать с пропусками."> Градиентный бустинг XGBoost </label></li>
+                            <li><label><input type="checkbox" name="action" value="R_gradient_boosting_cat" title="Высокоточный, очень устойчив к выбросам и к переобучению.&#13;&#10Подходит для больших данных (но медленнее XGBoost).&#13;&#10Может работать с пропусками."> Градиентный бустинг CatBoost </label></li>
                             <li><label><input type="checkbox" name="action" value="R_svm" title="Для сложных задач на небольших наборах данных, хорошо разделяет сложные границы."> Метод опорных векторов (SVM) </label></li>
-                            <li><label><input type="checkbox" name="action" value="R_knn" title="Для небольших и простых наборов данных, чувствительна к шумам и выбросам."> K-ближайших соседей (KNN) </label></li>
+                            <li><label><input type="checkbox" name="action" value="R_knn" title="Для небольших и простых наборов данных, чувствительна к шумам и выбросам."> Метод K-ближайших соседей (KNN) </label></li>
                         </ul>
                         <li class="action-item has-submenu" data-action="dl_models">
-                            <span class="toggle-icon" title="Отнесение объектов к заранее определённым дискретным классам (например, да/нет, оценка (1-5), диагноз)."></span> Классификация
+                            <span class="toggle-icon" title="Отнесение объектов к заранее определённым дискретным классам&#13;&#10(например, да/нет, оценка (1-5), диагноз)."></span> Классификация
                         </li>
                         <ul class="submenu">
                             <!-- Подподпункты -->
-                            <li><label><input type="checkbox" name="action" value="C_logistic_regression" title="Быстрая, простая, но плохо справляется со сложными зависимостями."> Логистическая регрессия </label></li>
+                            <li><label><input type="checkbox" name="action" value="C_logistic_regression" title="Быстрая и простая, но плохо справляется со сложными зависимостями."> Логистическая регрессия </label></li>
                             <li><label><input type="checkbox" name="action" value="C_decision_tree" title="Обрабатывает нелинейные, сложные связи, склонно к переобучению (особенно на малых данных), чувствительно к шумам."> Деревья решений  </label></li>
                             <li><label><input type="checkbox" name="action" value="C_random_forest" title="Улучшенная версия дерева решений: устойчивее к переобучению и шуму, но медленнее."> Случайный лес </label></li>
-                            <li><label><input type="checkbox" name="action" value="C_gradient_boosting_xg" title="Высокоточный, устойчив к выбросам, подходит для больших данных, быстрый. Требует тщательного подбора параметров."> Градиентный бустинг (XGBoost) </label></li>
-                            <li><label><input type="checkbox" name="action" value="C_gradient_boosting_cat" title="Высокоточный, очень устойчив к выбросам и к переобучению, подходит для больших данных (но медленнее XGBoost). Отличный выбор, если в данных много категориальных признаков (сам их обрабатывает)."> Градиентный бустинг (CatBoost) </label></li>
+                            <li><label><input type="checkbox" name="action" value="C_gradient_boosting_xg" title="Высокоточный, устойчив к выбросам, подходит для больших данных, быстрый.&#13;&#10Требует тщательного подбора параметров."> Градиентный бустинг (XGBoost) </label></li>
+                            <li><label><input type="checkbox" name="action" value="C_gradient_boosting_cat" title="Высокоточный, очень устойчив к выбросам и к переобучению.&#13;&#10Подходит для больших данных (но медленнее XGBoost).&#13;&#10Отличный выбор, если в данных много категориальных признаков (сам их обрабатывает)."> Градиентный бустинг (CatBoost) </label></li>
                             <li><label><input type="checkbox" name="action" value="C_svm" title="Для сложных задач на небольших наборах данных, хорошо разделяет сложные границы."> Метод опорных векторов (SVM) </label></li>
-                            <li><label><input type="checkbox" name="action" value="C_knn" title="Для небольших и простых наборов данных, чувствительна к шумам и выбросам."> K-ближайших соседей (KNN) </label></li>
+                            <li><label><input type="checkbox" name="action" value="C_knn" title="Для небольших и простых наборов данных, чувствительна к шумам и выбросам."> Метод K-ближайших соседей (KNN) </label></li>
                         </ul>
                     </ul>
 
