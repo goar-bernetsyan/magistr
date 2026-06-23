@@ -58,7 +58,7 @@ from sklearn.metrics import accuracy_score, mean_squared_error, mean_absolute_er
 
 from sklearn.preprocessing import MinMaxScaler, StandardScaler, RobustScaler, MaxAbsScaler
 
-sepp = ';' # разделитель столбцов в файле
+sepp = ',' # разделитель столбцов в файле
 # Словарь для сопоставления имени модели с классом sklearn/xgboost/catboost
 
 MODEL_MAP = {
